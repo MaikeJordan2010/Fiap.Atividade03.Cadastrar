@@ -14,16 +14,16 @@ namespace Contato.Cadastrar
         private readonly IContatoComandos _contatoComandos;
         private const string _nomeFila = "contato.fila.cadastrar";
 
-        public Worker(ILogger<Worker> logger, IContatoComandos contatoComandos)
+        public Worker(ILogger<Worker> logger, IContatoComandos contatoComandos, IConfiguration config)
         {
             _logger = logger;
             _contatoComandos = contatoComandos;
             _factory = new ConnectionFactory()
             {
-                HostName = "localhost",
-                UserName = "guest",
-                Password = "guest",
-
+                HostName = config.GetSection("RabbitLocal").GetValue<string>("Endereco") ?? "localhost",
+                UserName = config.GetSection("RabbitLocal").GetValue<string>("Usuario") ?? "guest",
+                Password = config.GetSection("RabbitLocal").GetValue<string>("Senha") ?? "guest",
+                Port = config.GetSection("RabbitLocal").GetValue<int>("Porta"),
             };
         }
 
