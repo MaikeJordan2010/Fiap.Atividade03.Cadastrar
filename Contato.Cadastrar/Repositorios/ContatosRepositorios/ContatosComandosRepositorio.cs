@@ -9,9 +9,9 @@ namespace Contato.Cadastrar.Repositorios.ContatosRepositorios
     {
         private readonly SqlConnection? _connection;
 
-        public ContatosComandosRepositorio(IDbConection connection)
+        public ContatosComandosRepositorio()
         {
-            _connection = connection.ObterConexao();
+            _connection = DbConection.ObterConexao();
         }
 
         public void Inserir(DadosContato contato)

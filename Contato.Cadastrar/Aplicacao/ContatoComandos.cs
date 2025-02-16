@@ -7,9 +7,9 @@ namespace Contato.Cadastrar.Aplicacao
     {
         private readonly IContatosComandosRepositorio _repositorio;
 
-        public ContatoComandos(IContatosComandosRepositorio repositorio)
+        public ContatoComandos()
         {
-            _repositorio = repositorio;
+            _repositorio = new ContatosComandosRepositorio();
         }
         public void Inserir(DadosContato dadosContato)
         {

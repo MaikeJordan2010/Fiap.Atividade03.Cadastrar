@@ -14,10 +14,10 @@ namespace Contato.Cadastrar
         private readonly IContatoComandos _contatoComandos;
         private const string _nomeFila = "contato.fila.cadastrar";
 
-        public Worker(ILogger<Worker> logger, IContatoComandos contatoComandos, IConfiguration config)
+        public Worker(ILogger<Worker> logger, IConfiguration config)
         {
             _logger = logger;
-            _contatoComandos = contatoComandos;
+            _contatoComandos = new ContatoComandos();
             _factory = new ConnectionFactory()
             {
                 HostName = config.GetSection("RabbitLocal").GetValue<string>("Endereco") ?? "localhost",

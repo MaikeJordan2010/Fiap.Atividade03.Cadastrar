@@ -1,24 +1,24 @@
 ﻿using Contato.Cadastrar.Dominio;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Contato.Cadastrar.Repositorios.Context
 {
-    public class DbConection : IDbConection
+    public class DbConection
     {
 
-        private SqlConnection? _sqlConnection;
-        private readonly IConfiguration _config;
+        private static SqlConnection? _sqlConnection;
 
-        public DbConection(IConfiguration config)
-        {
-            _config = config;
-        }
-
-
-        public SqlConnection? ObterConexao()
+        public static SqlConnection? ObterConexao()
         {
             try
             {
+                var builder = new ConfigurationBuilder()
+                          .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
+
+                var _config = builder.Build();
+
                 if (_sqlConnection == null) {
 
                     var stringConexao = _config.GetConnectionString("DefaultConnection");

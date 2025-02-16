@@ -1,0 +1,21 @@
+apiVersion: v1
+kind : Pod
+metadata:
+  name: cadastrar
+  labels:
+    app: cadastrar
+spec:
+  containers:
+  - name: servicocadastrar
+    image: maikejordan2010/fiap.atividade03.cadastrar:v1
+    env:
+      - name: CONNECTION_STRING
+        value: Server=host.docker.internal,52291;Database=FIAP_Atividade03;User Id=sa;password=123456;Encrypt=False
+      - name: ENDERECO
+        value: host.docker.internal
+      - name: PORTA
+        value: "5672"
+      - name: USUARIO
+        value: guest
+      - name: SENHA
+        value: guest
